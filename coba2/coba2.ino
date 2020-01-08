@@ -1,17 +1,16 @@
-#include <SPI.h>
+//#include <SPI.h>
 #include <Ethernet.h>
 
-byte mac[] = {
-  0x21, 0xAA, 0xBB, 0xCC, 0xDE, 0x02
-};
+byte mac[] = { 0x28, 0xAA, 0xBB, 0xCC, 0xDE, 0x02 };
 
-#define echoPin 12
-#define trigPin 11
+#define echoPin 4
+#define trigPin 2
 //#define LEDPin 13
 
 EthernetClient client;
+ 
 int maximumRange = 50;
-int minimumRange =00;
+int minimumRange = 00;
 long duration, distance;
 
 void setup() {
@@ -20,6 +19,7 @@ void setup() {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
+  Serial.println("Initialize DHCP....");
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
     if (Ethernet.hardwareStatus() == EthernetNoHardware) {
@@ -31,6 +31,7 @@ void setup() {
       delay(1);
     }
   }
+  Serial.println(Ethernet.localIP());
 }
 
 
@@ -48,12 +49,14 @@ void loop() {
   }else{
     Serial.println(distance);
 
-    if (client.connect("192.168.197.57",80)){
-      String kiriman = "jarak=";
-      kiriman += distance;
-  
-     client.println("POST /polinema-coba/terima2.php HTTP/1.1");
-     client.println("Host: 192.168.197.5");
+    String kiriman = "jarak=";
+    kiriman += distance;
+    
+    if (client.connect("192.168.196.130",80)){
+     Serial.println("Sending to Server: ");
+     client.println("POST /pkl/terima3.php HTTP/1.1");
+     Serial.println("POST /pkl/terima3.php HTTP/1.1");
+     client.println("Host: 192.168.196.130");
      client.println("Content-Type: application/x-www-form-urlencoded");
      client.println("Connection: close");
      client.println("User-Agent: Arduino/1.0");
@@ -62,13 +65,15 @@ void loop() {
      client.println();
      client.print(kiriman);
      client.println();
-     Serial.println(kiriman);
+     Serial.println("terkoneksi");
+   }else {
+    Serial.println("tidak terkoneksi");  
    }
-  
+   
    if (client.connected()){
     client.stop(); 
    }
-    delay(100);
+    delay(1000);
   }
 
 }

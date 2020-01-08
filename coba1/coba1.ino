@@ -1,9 +1,11 @@
+#include <Ethernet.h>
+
 #define echoPin 12
 #define trigPin 11
 //#define LEDPin 13
-#include <Ethernet.h>
 
-int maximumRange = 200;
+
+int maximumRange = 50;
 int minimumRange =00;
 long duration, distance;
 
@@ -24,7 +26,8 @@ void loop() {
   distance = duration/58.2;
 
   if(distance >= maximumRange || distance <= minimumRange){
-//    Serial.println("-1");
+    Serial.println("-1");
+
   }else{
     Serial.println(distance);
 
