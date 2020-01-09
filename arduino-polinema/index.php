@@ -77,9 +77,9 @@ include_once 'koneksi.php';
     <td>Keterangan</td>
     </tr>
     <tr>
-    <!-- <td>
-
-    </td> -->
+    <td>
+        <?php echo .produksi?>
+    </td>
     </tr>
 </table>
 <!-- <button type="button">Click Me!</button> -->
