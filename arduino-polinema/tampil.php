@@ -7,19 +7,19 @@ $result = $mysqli->query("SELECT p.id_produksi, p.waktu, s.lokasi, s.ket FROM pr
 $hari = date('Y-m-d');
 $jumlah = $mysqli->query("SELECT count(*) FROM produksi WHERE waktu>='2020-01-09 03:08:07' and waktu<='2020-01-09 03:08:11'");
 $jml_tmp = [];
-if($resjml = $jumlah->fetch_assoc()){
-    $jml_tmp['jml'] = $resjml['max_jumlah'];
 
-}
 if($result && $result -> num_rows ){
     $output = [];
 
     foreach($result as $row){
         $output [] =[
-            'content' => "Jumlah : ".$row['jml'],
-            'time' => date('H:i:s', strtotime($row['waktu'])),
-            'jml' => $row
-        ]
+            'content' => "Kode Sensor : ".$row['id_sensor'],
+            'time' => $row['waktu'],
+            'id_sensor' => $row['id_sensor']
+        ];
     }
+    
 }
+echo $jumlah;
+    echo $output;
 ?>
