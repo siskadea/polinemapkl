@@ -78,7 +78,7 @@ include_once 'koneksi.php';
     </tr>
     <tr>
     <td>
-        <?php echo .produksi?>
+  
     </td>
     </tr>
 </table>

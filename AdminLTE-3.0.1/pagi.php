@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<?php
+include_once 'koneksi.php';
+date_default_timezone_set("Asia/Jakarta");
+$today = date('Y-m-d');
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -268,7 +273,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="pagi.php" class="nav-link">
+                    <a href="#" class="nav-link">
                       <i class="far fa-dot-circle nav-icon"></i>
                       <p>Pagi</p>
                     </a>
@@ -441,10 +446,48 @@
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Advanced Form</li>
             </ol>
+          </div>
+          <?php
+          // $shift1 = $koneksi->query("SELECT count(*) FROM produksi WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+          // $data1 = $shift1->fetch_row();
+          // echo $data1[0];
+          ?>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover table-striped">
+              <thead>
+              </thead>
+              <tr>
+                  <!-- <th><h6>ID Produksi</h6></th> -->
+                  <th><h6>ID Sensor</h6></th>
+                  <th><h6>Lokasi Sensor<h6></th>
+                  <th><h6>Jumlah</h6></th>
+                  <th><h6>Keterangan</h6></th>
+              </tr>
+              </thead>
+              <tbody>
+              <?php
+                $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+                //$result = mysqli_query($koneksi, $shift1);
+                if(mysqli_num_rows($shift1) > 0){
+                  while($row = mysqli_fetch_assoc($shift1)){
+                    echo '<tr>';
+                    // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
+                    echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
+                    echo "<td><h6>" . $row["lokasi"] . "</h6></td>";
+                    echo "<td><h6>" . $row["jumlah"] . "</h6></td>";
+                    echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
+                  }
+                }
+              ?>
+              </tbody>
+              </table>
+            </div>
+          </div>
+
+          </div>
           </div><!-- /.col -->
         </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
+
     <!-- /.content-header -->
 
     <!-- Main content -->
