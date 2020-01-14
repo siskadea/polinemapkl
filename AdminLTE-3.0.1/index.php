@@ -21,7 +21,7 @@
 </head>
 
 <body class="hold-transition login-page">
-    <img src="dist/img/logo.png" alt="logo" width="500px">
+    <img src="dist/img/logo.png" alt="logo" width="350px" height="197px">
     <div class="login-box">
         <div class="login-logo">
             <a href="index2.html"><b>Pindad</b>Divmu</a>
@@ -31,7 +31,7 @@
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="index3.html" method="post">
+                <form action="index1.html" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">

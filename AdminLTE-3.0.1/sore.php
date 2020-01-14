@@ -179,8 +179,8 @@ $today = date('Y-m-d');
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-gray">Shift Pagi</h1>
-              <h3 >07.00-15.00 WIB</h3>
+              <h1 class="m-0 text-gray">Shift Sore</h1>
+              <h3 >15.00-23.00 WIB</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -207,10 +207,11 @@ $today = date('Y-m-d');
               </thead>
               <tbody>
               <?php
-                $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+                $shift2 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='15:00:01' and TIME(waktu)<='23:00:00' AND DATE(waktu)='$today'");
+                // $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
                 //$result = mysqli_query($koneksi, $shift1);
-                if(mysqli_num_rows($shift1) > 0){
-                  while($row = mysqli_fetch_assoc($shift1)){
+                if(mysqli_num_rows($shift2) > 0){
+                  while($row = mysqli_fetch_assoc($shift2)){
                     echo '<tr>';
                     // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
                     echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
