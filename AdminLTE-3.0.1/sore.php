@@ -5,10 +5,11 @@ date_default_timezone_set("Asia/Jakarta");
 $today = date('Y-m-d');
 ?>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Shift Sore</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -44,7 +45,7 @@ $today = date('Y-m-d');
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="index1.php" class="nav-link">Home</a>
         </li>
       </ul>
 
@@ -62,12 +63,20 @@ $today = date('Y-m-d');
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-              <a class="nav-link" data-toggle="dropdown" href="#">
-                  <i class="far fa-comments"></i>
-                  <span class="badge badge-danger navbar-badge">3</span>
-                </a>
-          </li>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+            <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
+          </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -75,9 +84,8 @@ $today = date('Y-m-d');
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-info elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="dist/img/logooh.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+      <a href="index1.php" class="brand-link">
+        <img src="dist/img/logooh.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-dark">PindadDivmu</span>
       </a>
 
@@ -158,11 +166,17 @@ $today = date('Y-m-d');
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="tahun.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tahunan</p>
-                    </a>
-                  </li>
+                  <a href="tahun.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tahunan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="coba.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Custom Date Range</p>
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>
@@ -180,7 +194,7 @@ $today = date('Y-m-d');
           <div class="row mb-2">
             <div class="col-sm-6">
               <h1 class="m-0 text-gray">Shift Sore</h1>
-              <h3 >15.00-23.00 WIB</h3>
+              <h3>15.00-23.00 WIB</h3>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -189,67 +203,75 @@ $today = date('Y-m-d');
               </ol>
             </div><!-- /.col -->
             <?php
-          // $shift1 = $koneksi->query("SELECT count(*) FROM produksi WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
-          // $data1 = $shift1->fetch_row();
-          // echo $data1[0];
-          ?>
+            // $shift1 = $koneksi->query("SELECT count(*) FROM produksi WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+            // $data1 = $shift1->fetch_row();
+            // echo $data1[0];
+            ?>
             <div class="table-responsive">
               <table class="table table-bordered table-hover table-striped">
-              <thead>
-              </thead>
-              <tr>
+                <thead>
+                </thead>
+                <tr>
                   <!-- <th><h6>ID Produksi</h6></th> -->
-                  <th><h6>ID Sensor</h6></th>
-                  <th><h6>Lokasi Sensor<h6></th>
-                  <th><h6>Jumlah</h6></th>
-                  <th><h6>Keterangan</h6></th>
-              </tr>
-              </thead>
-              <tbody>
-              <?php
-                $shift2 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='15:00:01' and TIME(waktu)<='23:00:00' AND DATE(waktu)='$today'");
-                // $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
-                //$result = mysqli_query($koneksi, $shift1);
-                if(mysqli_num_rows($shift2) > 0){
-                  while($row = mysqli_fetch_assoc($shift2)){
-                    echo '<tr>';
-                    // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
-                    echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
-                    echo "<td><h6>" . $row["lokasi"] . "</h6></td>";
-                    echo "<td><h6>" . $row["jumlah"] . "</h6></td>";
-                    echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
+                  <th>
+                    <h6>ID Sensor</h6>
+                  </th>
+                  <th>
+                    <h6>Lokasi Sensor<h6>
+                  </th>
+                  <th>
+                    <h6>Jumlah</h6>
+                  </th>
+                  <th>
+                    <h6>Keterangan</h6>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                  <?php
+                  $shift2 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='15:00:01' and TIME(waktu)<='23:00:00' AND DATE(waktu)='$today'");
+                  // $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+                  //$result = mysqli_query($koneksi, $shift1);
+                  if (mysqli_num_rows($shift2) > 0) {
+                    while ($row = mysqli_fetch_assoc($shift2)) {
+                      echo '<tr>';
+                      // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
+                      echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
+                      echo "<td><h6>" . $row["lokasi"] . "</h6></td>";
+                      echo "<td><h6>" . $row["jumlah"] . "</h6></td>";
+                      echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
+                    }
                   }
-                }
-              ?>
-              </tbody>
+                  ?>
+                </tbody>
               </table>
             </div>
           </div>
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <section class="content">
-
-      </section>
-      <!-- /.content -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
     </div>
-    <!-- /.content-wrapper -->
-    <footer class="main-footer">
-      <strong>Copyright &copy; 2020 <a href="polinema.ac.id">Polinema</a>.</strong>
-      All rights reserved.
-      <!-- <div class="float-right d-none d-sm-inline-block">
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2020 <a href="polinema.ac.id">Polinema</a>.</strong>
+    All rights reserved.
+    <!-- <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 3.0.1
     </div> -->
-    </footer>
+  </footer>
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-light">
-      <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-light">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
 

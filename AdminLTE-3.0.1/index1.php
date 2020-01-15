@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Dashboard</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -40,7 +40,7 @@
           <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
+          <a href="index1.php" class="nav-link">Home</a>
         </li>
       </ul>
 
@@ -58,20 +58,20 @@
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-      <li class="nav-item dropdown no-arrow">
-                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
-                    <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
-                </a>
-                <!-- Dropdown - User Information -->
-                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+            <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
+          </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
 
-                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                        Logout
-                    </a>
-                </div>
-            </li>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+              <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+              Logout
+            </a>
+          </div>
+        </li>
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -79,9 +79,8 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-light-info elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
-        <img src="dist/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-          style="opacity: .8">
+      <a href="index1.php" class="brand-link">
+        <img src="dist/img/logooh.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-dark">PindadDivmu</span>
       </a>
 
@@ -162,17 +161,17 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="tahun.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Tahunan</p>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="custdate.php" class="nav-link">
-                      <i class="far fa-circle nav-icon"></i>
-                      <p>Custom Date Range</p>
-                    </a>
-                  </li>
+                  <a href="tahun.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Tahunan</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="coba.php" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Custom Date Range</p>
+                  </a>
+                </li>
               </ul>
             </li>
           </ul>
