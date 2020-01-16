@@ -1,10 +1,16 @@
 <!DOCTYPE html>
+<?php
+include_once 'koneksi.php';
+date_default_timezone_set("Asia/Jakarta");
+$today = date('Y-m-d');
+
+?>
 <html>
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Pindad | Log in</title>
+    <title>DivmuPindad | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,20 +26,35 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
-    <img src="dist/img/logo.png" alt="logo" width="350px" height="197px">
+<body class="login-page" style="background-image: url('dist/img/k.png');">
+<!-- <img src="dist/img/bg_login.png" alt="gambar" width=50% > -->
+    <!-- <img src="dist/img/logo.png" alt="logo" width="350px" height="197px"> -->
     <div class="login-box">
-        <div class="login-logo">
-            <a href="index2.html"><b>Pindad</b>Divmu</a>
-        </div>
+    <style>
+                    .center {
+                        margin-left: auto;
+                        margin-right: auto;
+                        display: block;
+                        width: 100px
+                    }
+                </style>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                
+
+                <div>
+                    <img class="center" src="dist/img/logo.png" />
+                </div>
+                <!-- <img src="dist/img/logo.png" alt="logo" width="150px" align> -->
+                <div class="login-logo">
+                    <strong>Divmu</strong>
+                </div>
+                <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
                 <form action="index1.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -51,7 +72,7 @@
                     <div class="row">
                         <div class="col-8">
                             <p class="mb-0">
-                                <a href="register.html" class="text-center">Register a new membership</a>
+                                <a href="register.php" class="text-center">Register a new membership</a>
                             </p>
                         </div>
                         <!-- /.col -->

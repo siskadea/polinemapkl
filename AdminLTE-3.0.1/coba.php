@@ -1,10 +1,12 @@
-<?php  
-     $connect = mysqli_connect("localhost", "root", "", "polinema_arduino");  
-     $query = "SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah 
-               FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
-               ORDER BY waktu desc";  
-     $result = mysqli_query($connect, $query);  
-?> 
+<?php
+include_once 'koneksi.php';
+date_default_timezone_set("Asia/Jakarta");
+$today = date('Y-m-d');
+$query = "SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah 
+          FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
+          ORDER BY waktu desc";
+$result = mysqli_query($koneksi, $query);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -34,10 +36,10 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>    
-           <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>  
-           <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
-           <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" /> -->
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -206,56 +208,55 @@
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item active">Custom</li>
               </ol>
-           </div> 
+            </div>
           </div>
-          
+
         </div><!-- /.container-fluid -->
-        </div><!-- /.col -->
-            <div class="container" style="width:900px;">   
-                <div class="col-md-3">  
-                     <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date" />  
-                </div>  
-                <BR>
-                <div class="col-md-3">  
-                     <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date" />  
-                </div>  
-                <BR>
-                <div class="col-md-3">  
-                     <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />  
-                </div>  
-                
-                <div style="clear:both"></div>                 
-                <br />  
-                <div id="order_table">  
-                     <table class="table table-bordered table-hover table-striped">
-                          <tr>  
-                            <th>ID SENSOR</th>  
-                            <th>LOKASI</th>  
-                            <th>JUMLAH</th>  
-                            <th>KETERANGAN</th>  
-                          </tr>  
-                     <?php  
-                     while($row = mysqli_fetch_array($result))  
-                     {  
-                     ?>  
-                          <tr>  
-                               <td><?php echo $row["id_sensor"]; ?></td>  
-                               <td><?php echo $row["lokasi"]; ?></td>  
-                               <td><?php echo $row["jumlah"]; ?></td>  
-                               <td><?php echo $row["keterangan"]; ?></td>  
-                               
-                          </tr>  
-                     <?php  
-                     }  
-                     ?>  
-                     </table>  
-                </div>  
+      </div><!-- /.col -->
+      <div class="container" style="width:900px;">
+        <div class="col-md-3">
+          <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date" />
+        </div>
+        <BR>
+        <div class="col-md-3">
+          <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date" />
+        </div>
+        <BR>
+        <div class="col-md-3">
+          <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
+        </div>
+
+        <div style="clear:both"></div>
+        <br />
+        <div id="order_table">
+          <table class="table table-bordered table-hover table-striped">
+            <tr>
+              <th>ID SENSOR</th>
+              <th>LOKASI</th>
+              <th>JUMLAH</th>
+              <th>KETERANGAN</th>
+            </tr>
+            <?php
+            while ($row = mysqli_fetch_array($result)) {
+              ?>
+              <tr>
+                <td><?php echo $row["id_sensor"]; ?></td>
+                <td><?php echo $row["lokasi"]; ?></td>
+                <td><?php echo $row["jumlah"]; ?></td>
+                <td><?php echo $row["keterangan"]; ?></td>
+
+              </tr>
+            <?php
+            }
+            ?>
+          </table>
+        </div>
       </div>
       <!-- /.content-header -->
 
       <!-- Main content -->
       <section class="content">
-      
+
       </section>
       <!-- /.content -->
     </div>
@@ -275,6 +276,25 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Yakin untukkeluar?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">pilih "Logout" untuk keluar.</div>
+        <div class="modal-footer">
+          <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-danger" href="index.php">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- jQuery -->
   <script src="plugins/jquery/jquery.min.js"></script>
@@ -311,35 +331,35 @@
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
 </body>
+
 </html>
-<script>  
-      $(document).ready(function(){  
-           $.datepicker.setDefaults({  
-                dateFormat: 'yy-mm-dd'   
-           });  
-           $(function(){  
-                $("#from_date").datepicker();  
-                $("#to_date").datepicker();  
-           });  
-           $('#filter').click(function(){  
-                var from_date = $('#from_date').val();  
-                var to_date = $('#to_date').val();  
-                if(from_date != '' && to_date != '')  
-                {  
-                     $.ajax({  
-                          url:"filter.php",  
-                          method:"POST",  
-                          data:{from_date:from_date, to_date:to_date},  
-                          success:function(data)  
-                          {  
-                               $('#order_table').html(data);  
-                          }  
-                     });  
-                }  
-                else  
-                {  
-                     alert("Please Select Date");  
-                }  
-           });  
-      });  
- </script>
+<script>
+  $(document).ready(function() {
+    $.datepicker.setDefaults({
+      dateFormat: 'yy-mm-dd'
+    });
+    $(function() {
+      $("#from_date").datepicker();
+      $("#to_date").datepicker();
+    });
+    $('#filter').click(function() {
+      var from_date = $('#from_date').val();
+      var to_date = $('#to_date').val();
+      if (from_date != '' && to_date != '') {
+        $.ajax({
+          url: "filter.php",
+          method: "POST",
+          data: {
+            from_date: from_date,
+            to_date: to_date
+          },
+          success: function(data) {
+            $('#order_table').html(data);
+          }
+        });
+      } else {
+        alert("Please Select Date");
+      }
+    });
+  });
+</script>

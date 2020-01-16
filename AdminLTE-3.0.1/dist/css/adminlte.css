@@ -67,7 +67,9 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #ffffff;
+  /* -color: #ffffff; */
+  /* background: url('img/bg_login.png'); */
+  background-image: "bg_login.png";
 }
 
 [tabindex="-1"]:focus {
@@ -19514,7 +19516,6 @@ html.maximized-card {
 .register-page {
   -ms-flex-align: center;
   align-items: center;
-  background: #e9ecef;
   display: -ms-flexbox;
   display: flex;
   height: 100vh;
