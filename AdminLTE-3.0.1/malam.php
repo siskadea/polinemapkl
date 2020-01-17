@@ -3,6 +3,11 @@
 include_once 'koneksi.php';
 date_default_timezone_set("Asia/Jakarta");
 $today = date('Y-m-d');
+session_start();
+$name = $_SESSION['uname'];
+if (!isset($_SESSION['uname'])) {
+    header("location: index.php");
+}
 ?>
 <html>
 
@@ -73,7 +78,7 @@ $today = date('Y-m-d');
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown no-arrow">
                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name ?></span>
                         <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
                     </a>
                     <!-- Dropdown - User Information -->
@@ -125,7 +130,7 @@ $today = date('Y-m-d');
                         </li>
                         <li class="nav-item has-treeview">
                             <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-circle"></i>
+                            <i class="nav-icon fas fa-book"></i>
                                 <p>
                                     Laporan
                                     <i class="right fas fa-angle-left"></i>
@@ -187,6 +192,24 @@ $today = date('Y-m-d');
                                 </li>
                             </ul>
                         </li>
+                        <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+                <p>
+                  Mesin
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -216,34 +239,29 @@ $today = date('Y-m-d');
                                 <thead>
                                 </thead>
                                 <tr>
-                                    <!-- <th><h6>ID Produksi</h6></th> -->
-                                    <th>
-                                        <h6 width="5%">ID Sensor</h6>
+                                    <th width="25%">
+                                        Nama Sensor
                                     </th>
-                                    <th>
-                                        <h6 width="10%">Lokasi Sensor<h6>
+                                    <th width="25%">
+                                        Lokasi Sensor
                                     </th>
-                                    <th>
-                                        <h6 width="10%">Jumlah</h6>
+                                    <th width="15%">
+                                        Jumlah
                                     </th>
-                                    <th>
-                                        <h6 width="30%">Keterangan</h6>
-                                    </th>
+
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    $shift3 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE waktu>='$today 23:00:01' and '$today 07:00:00'");
+                                    $shift3 = $koneksi->query("SELECT s.keterangan, s.lokasi, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE waktu>='$today 23:00:01' and '$today 07:00:00'");
                                     // $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
                                     //$result = mysqli_query($koneksi, $shift1);
                                     if (mysqli_num_rows($shift3) > 0) {
                                         while ($row = mysqli_fetch_assoc($shift3)) {
                                             echo '<tr>';
-                                            // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
-                                            echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
+                                            echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
                                             echo "<td><h6>" . $row["lokasi"] . "</h6></td>";
                                             echo "<td><h6>" . $row["jumlah"] . "</h6></td>";
-                                            echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
                                         }
                                     }
                                     ?>
@@ -280,23 +298,23 @@ $today = date('Y-m-d');
     <!-- ./wrapper -->
 
     <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Yakin untukkeluar?</h5>
-              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yakin untukkeluar?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">pilih "Logout" untuk keluar.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-danger" href="index.php">Logout</a>
+                </div>
             </div>
-            <div class="modal-body">pilih "Logout" untuk keluar.</div>
-            <div class="modal-footer">
-              <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-danger" href="index.php">Logout</a>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>

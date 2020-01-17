@@ -1,4 +1,14 @@
 <!DOCTYPE html>
+<?php
+include_once 'koneksi.php';
+date_default_timezone_set("Asia/Jakarta");
+$today = date('Y-m-d');
+session_start();
+$name=$_SESSION['uname'];
+if(!isset($_SESSION['uname'])){
+  header("location: index.php");
+}
+?>
 <html>
 
 <head>
@@ -60,7 +70,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name?></span>
             <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
           </a>
           <!-- Dropdown - User Information -->
@@ -112,41 +122,18 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
+              <i class="nav-icon fas fa-book"></i>
                 <p>
                   Laporan
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
+                <li class="nav-item">
+                  <a href="shiftcoba.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>
-                      Shift
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
+                    <p>Shift</p>
                   </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="pagi.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Pagi</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="sore.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Sore</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="malam.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Malam</p>
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li class="nav-item">
                   <a href="hari.php" class="nav-link">
@@ -173,6 +160,24 @@
                   </a>
                 </li>
               </ul>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="mesin.php" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+                <p>
+                  Mesin
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="userpass.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
             </li>
           </ul>
         </nav>
@@ -237,7 +242,7 @@
             <div class="modal-body">pilih "Logout" untuk keluar.</div>
             <div class="modal-footer">
               <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-danger" href="index.php">Logout</a>
+              <a class="btn btn-danger" href="proses/prosesLogout.php">Logout</a>
             </div>
           </div>
         </div>

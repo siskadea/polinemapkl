@@ -3,7 +3,19 @@
 include_once 'koneksi.php';
 date_default_timezone_set("Asia/Jakarta");
 $today = date('Y-m-d');
-
+session_start();
+if(isset($_SESSION['uname']) AND isset($_SESSION['level'])){
+    if($_SESSION['level']=='1'){
+        header("Location: index1.php");
+    }else{
+        header("Location: index1.php");
+    }
+}
+if(isset($_GET['pesan'])){
+    $mess="<p>{$_GET['pesan']}</p>";
+}else{
+    $mess="";
+}
 ?>
 <html>
 
@@ -26,22 +38,20 @@ $today = date('Y-m-d');
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="login-page" style="background-image: url('dist/img/k.png');">
-<!-- <img src="dist/img/bg_login.png" alt="gambar" width=50% > -->
-    <!-- <img src="dist/img/logo.png" alt="logo" width="350px" height="197px"> -->
+<body class="login-page" style="background-image: url('dist/img/kl.png');">
     <div class="login-box">
-    <style>
-                    .center {
-                        margin-left: auto;
-                        margin-right: auto;
-                        display: block;
-                        width: 100px
-                    }
-                </style>
+        <style>
+            .center {
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                width: 100px
+            }
+        </style>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                
+
 
                 <div>
                     <img class="center" src="dist/img/logo.png" />
@@ -52,9 +62,9 @@ $today = date('Y-m-d');
                 </div>
                 <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
-                <form action="index1.php" method="post">
+                <form action="proses/prosesLogin.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" placeholder="Username" name="uname" id="uname">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -62,7 +72,7 @@ $today = date('Y-m-d');
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="pass" id="pass">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -70,15 +80,10 @@ $today = date('Y-m-d');
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-8">
-                            <p class="mb-0">
-                                <a href="register.php" class="text-center">Register a new membership</a>
-                            </p>
+                        <div class="col">
+                        <button type="submit" class="btn btn-info btn-block">Masuk</button>
                         </div>
-                        <!-- /.col -->
-                        <div class="col-4">
-                            <button type="submit" class="btn btn-info btn-block">Sign In</button>
-                        </div>
+                        <p><?php echo $mess; ?></p> 
                         <!-- /.col -->
                     </div>
                 </form>

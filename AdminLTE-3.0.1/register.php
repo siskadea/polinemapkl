@@ -9,6 +9,7 @@ $today = date('Y-m-d');
 // $result = mysqli_query($koneksi, $query);
 ?>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -27,90 +28,100 @@ $today = date('Y-m-d');
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body class="hold-transition register-page">
-<div class="register-box">
-  <div class="register-logo">
+
+<body class="login-page" style="background-image: url('dist/img/kl.png');">
+  <div class="register-box">
+    <style>
+      .center {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+        width: 100px
+      }
+    </style>
+    <!-- <div class="register-logo">
     <a href="index1.php"><b>Admin</b>LTE</a>
-  </div>
+  </div> -->
 
-  <div class="card">
-    <div class="card-body register-card-body">
-      <p class="login-box-msg">Daftar Akun Baru</p>
-
-      <form action="index.php" method="post">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Nama Lengkap">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Email">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
-            </div>
-          </div>
-        </div>
+    <div class="card">
+      <div class="card-body register-card-body">
         <div>
-        <label>Level User</label><br>
-                <select class="form-control" name="level">
-                    <?php
-                    $query = "select*from lat_user_lvl";
-                    $res=mysqli_query($koneksi,$query);
-                    if(mysqli_num_rows($res)>0){
-                        while ($row = mysqli_fetch_assoc($res)){
-                            $id=$row['id'];
-                            $level=$row['lvl_name'];
-                            echo "<option value=$id>$level</option>";
-                        }
-                    }else{
-                        echo "<option>cannot find user level</option>";
-                    }
-                    mysqli_close($koneksi);
-                    //your php code goes from here
-                    ?>
-                </select>
-          <!-- <input type="password" class="form-control" placeholder="Password">
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span> -->
+          <img class="center" src="dist/img/logo.png" />
+        </div>
+        <div class="login-logo">
+          <strong>Divmu</strong>
+        </div>
+
+        <form action="proses/prosesRegister.php" method="post">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Nama Lengkap">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-          <a href="index.php" class="text-center">Sudah punya akun</a>
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Email">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-envelope"></span>
+              </div>
+            </div>
           </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-info btn-block">Daftar</button>
+          <div class="input-group mb-3">
+            <input type="password" class="form-control" placeholder="Password">
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
           </div>
-          <!-- /.col -->
-        </div>
-      </form>
-      
-    </div>
-    <!-- /.form-box -->
-  </div><!-- /.card -->
-</div>
-<!-- /.register-box -->
+          <div class="input-group mb-3">
+            <!-- <label>Level User</label><br> -->
+            <select class="form-control" name="level">
+              
+                <?php
+                $query = "select*from lat_user_lvl";
+                $res = mysqli_query($koneksi, $query);
+                if (mysqli_num_rows($res) > 0) {
+                  while ($row = mysqli_fetch_assoc($res)) {
+                    $id = $row['id'];
+                    $level = $row['lvl_name'];
+                    echo "<option value=$id>$level</option>";
+                  }
+                } else {
+                  echo "<option>cannot find user level</option>";
+                }
+                mysqli_close($koneksi);
+                //your php code goes from here
+                ?>
+              </select>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <a href="index.php" class="text-center">Sudah punya akun</a>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button type="submit" class="btn btn-info btn-block">Daftar</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
 
-<!-- jQuery -->
-<script src="plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/adminlte.min.js"></script>
+      </div>
+      <!-- /.form-box -->
+    </div><!-- /.card -->
+  </div>
+  <!-- /.register-box -->
+
+  <!-- jQuery -->
+  <script src="plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="dist/js/adminlte.min.js"></script>
 </body>
+
 </html>

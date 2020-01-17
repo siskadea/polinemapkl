@@ -1,15 +1,20 @@
-<?php
-    include_once 'koneksi.php';
-?>
-
 <!DOCTYPE html>
+<?php
+include_once 'koneksi.php';
+date_default_timezone_set("Asia/Jakarta");
+$today = date('Y-m-d');
+session_start();
+$name=$_SESSION['uname'];
+if(!isset($_SESSION['uname'])){
+  header("location: index.php");
+}
+?>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
-  <title>Dashboard</title>
+  <title>Mesin</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -32,10 +37,6 @@
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -69,7 +70,7 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name?></span>
             <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
           </a>
           <!-- Dropdown - User Information -->
@@ -95,6 +96,15 @@
 
       <!-- Sidebar -->
       <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+          <div class="image">
+            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+          </div>
+          <div class="info">
+            <a href="#" class="d-block">Alexander Pierce</a>
+          </div>
+        </div> -->
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -102,7 +112,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview menu-open">
-              <a href="#" class="nav-link active">
+              <a href="index1.php" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -112,41 +122,18 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
+              <i class="nav-icon fas fa-book"></i>
                 <p>
                   Laporan
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item has-treeview">
-                  <a href="#" class="nav-link">
+                <li class="nav-item">
+                  <a href="shiftcoba.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>
-                      Shift
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
+                    <p>Shift</p>
                   </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="pagi.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Pagi</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="sore.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Sore</p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="malam.php" class="nav-link">
-                        <i class="far fa-dot-circle nav-icon"></i>
-                        <p>Malam</p>
-                      </a>
-                    </li>
-                  </ul>
                 </li>
                 <li class="nav-item">
                   <a href="hari.php" class="nav-link">
@@ -174,6 +161,24 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item has-treeview">
+              <a href="mesin.php" class="nav-link active">  
+              <i class="fas fa-circle nav-icon"></i>
+                <p>
+                  Mesin
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="userpass.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- /.sidebar-menu -->
@@ -188,12 +193,12 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-gray">Mesin</h1>
+              <h1 class="m-0 text-gray">Dashboard</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Mesin</li>
+                <li class="breadcrumb-item active">Dashboard</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -203,7 +208,7 @@
 
       <!-- Main content -->
       <section class="content">
-      <div class="container" style="width:800px;">
+      <div class="container">
         <table class="table table-bordered table-hover table-striped">
 		    <thead>
             
@@ -216,9 +221,9 @@
             </thead>
             <tbody>
             <a class="btn btn-primary btn-sm" href="tambahSensorF.php">
-                <span class="glyphicon glyphicon-plus"></span>
+                <span class="glyphicon glyphicon-plus">Add</span>
             </a>
-            <br><br>
+            <br>
             <?php
                 $query = "SELECT * FROM sensor";
                 $result = mysqli_query($koneksi,$query);
@@ -236,9 +241,14 @@
                         //     <span class='glyphicon glyphicon-remove'></span></a>";
                         // echo "</td>";
                         echo "<td>";
-						echo "<a class='btn btn-warning mr-2' href='updateSensorF.php?id=".$row["id_sensor"]."'>Update</a>";
-						echo "<a class='btn btn-danger' href='controller/deleteSensor.php?id=".$row["id_sensor"]."'>Hapus</a>";
-						echo "</td>";
+						// echo "<a class='btn btn-warning mr-2' href='updateSensorF.php?id=".$row["id_sensor"]."'>Update</a>";
+            echo "<a class='btn btn-warning btn-sm' href='updateSensorF.php?id=".$row["id_sensor"]."'>
+                  <span class='glyphicon glyphicon-plus'>Update</span></a>";
+            // echo "<a class='btn btn-danger' href='controller/deleteSensor.php?id=".$row["id_sensor"]."'>Hapus</a>";
+            echo "   ";
+            echo "<a class='btn btn-danger btn-sm' href='controller/deleteSensor.php?id=".$row["id_sensor"]."'>
+                  <span class='glyphicon glyphicon-plus'>Delete</span></a>";
+            echo "</td>";
                     }
                 }
             ?>
@@ -278,7 +288,7 @@
             <div class="modal-body">pilih "Logout" untuk keluar.</div>
             <div class="modal-footer">
               <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-danger" href="index.php">Logout</a>
+              <a class="btn btn-danger" href="proses/prosesLogout.php">Logout</a>
             </div>
           </div>
         </div>
@@ -319,4 +329,5 @@
   <!-- AdminLTE for demo purposes -->
   <script src="dist/js/demo.js"></script>
 </body>
+
 </html>

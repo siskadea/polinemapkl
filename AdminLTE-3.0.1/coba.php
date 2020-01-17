@@ -2,10 +2,15 @@
 include_once 'koneksi.php';
 date_default_timezone_set("Asia/Jakarta");
 $today = date('Y-m-d');
-$query = "SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah 
+$query = "SELECT s.lokasi, s.keterangan, count(*) as jumlah 
           FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
           ORDER BY waktu desc";
 $result = mysqli_query($koneksi, $query);
+session_start();
+$name = $_SESSION['uname'];
+if (!isset($_SESSION['uname'])) {
+  header("location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +18,7 @@ $result = mysqli_query($koneksi, $query);
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Dashboard</title>
+  <title>Custom Date Range</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
@@ -73,7 +78,7 @@ $result = mysqli_query($koneksi, $query);
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name ?></span>
             <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
           </a>
           <!-- Dropdown - User Information -->
@@ -124,8 +129,8 @@ $result = mysqli_query($koneksi, $query);
               </a>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
+              <a href="index1.php" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
                 <p>
                   Laporan
                   <i class="right fas fa-angle-left"></i>
@@ -180,12 +185,30 @@ $result = mysqli_query($koneksi, $query);
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="coba.php" class="nav-link">
+                  <a href="coba.php" class="nav-link active"> 
                     <i class="far fa-circle nav-icon"></i>
                     <p>Custom Date Range</p>
                   </a>
                 </li>
               </ul>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="mesin.php" class="nav-link">
+              <i class="fas fa-circle nav-icon"></i>
+                <p>
+                  Mesin
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
+            </li>
+            <li class="nav-item has-treeview">
+              <a href="userpass.php" class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+                <p>
+                  User
+                  <!-- <i class="right fas fa-angle-left"></i> -->
+                </p>
+              </a>
             </li>
           </ul>
         </nav>
@@ -231,19 +254,24 @@ $result = mysqli_query($koneksi, $query);
         <div id="order_table">
           <table class="table table-bordered table-hover table-striped">
             <tr>
-              <th>ID SENSOR</th>
-              <th>LOKASI</th>
-              <th>JUMLAH</th>
-              <th>KETERANGAN</th>
+            <th>
+                    Nama Sensor
+                  </th>
+                  <th>
+                    Lokasi Sensor
+                  </th>
+                  <th>
+                    Jumlah
+                  </th>
             </tr>
             <?php
             while ($row = mysqli_fetch_array($result)) {
               ?>
               <tr>
-                <td><?php echo $row["id_sensor"]; ?></td>
+                <td><?php echo $row["keterangan"]; ?></td>
                 <td><?php echo $row["lokasi"]; ?></td>
                 <td><?php echo $row["jumlah"]; ?></td>
-                <td><?php echo $row["keterangan"]; ?></td>
+
 
               </tr>
             <?php
@@ -290,7 +318,7 @@ $result = mysqli_query($koneksi, $query);
         <div class="modal-body">pilih "Logout" untuk keluar.</div>
         <div class="modal-footer">
           <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-danger" href="index.php">Logout</a>
+          <a class="btn btn-danger" href="proses/prosesLogout.php">Logout</a>
         </div>
       </div>
     </div>
@@ -347,7 +375,7 @@ $result = mysqli_query($koneksi, $query);
       var to_date = $('#to_date').val();
       if (from_date != '' && to_date != '') {
         $.ajax({
-          url: "filter.php",
+          url: "proses/filter.php",
           method: "POST",
           data: {
             from_date: from_date,

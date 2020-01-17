@@ -3,6 +3,11 @@
 include_once 'koneksi.php';
 date_default_timezone_set("Asia/Jakarta");
 $today = date('Y-m-d');
+session_start();
+$name=$_SESSION['uname'];
+if(!isset($_SESSION['uname'])){
+  header("location: index.php");
+}
 ?>
 <html>
 <head>
@@ -64,7 +69,7 @@ $today = date('Y-m-d');
       <ul class="navbar-nav ml-auto">
       <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">User</span>
+                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $name?></span>
                     <img class="img-profile rounded-circle" src="dist/img/gb2.jpg" height="23px">
                 </a>
                 <!-- Dropdown - User Information -->
@@ -117,7 +122,7 @@ $today = date('Y-m-d');
             </li>
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-circle"></i>
+              <i class="nav-icon fas fa-book"></i>
                 <p>
                   Laporan
                   <i class="right fas fa-angle-left"></i>
@@ -207,30 +212,33 @@ $today = date('Y-m-d');
           // $data1 = $shift1->fetch_row();
           // echo $data1[0];
           ?>
-            <div class="table-responsive">
+            <div class="container" style="width:900px;">
               <table class="table table-bordered table-hover table-striped">
               <thead>
               </thead>
               <tr>
-                  <!-- <th><h6>ID Produksi</h6></th> -->
-                  <th><h6>ID Sensor</h6></th>
-                  <th><h6>Lokasi Sensor<h6></th>
-                  <th><h6>Jumlah</h6></th>
-                  <th><h6>Keterangan</h6></th>
+              <th width="25%">
+                    Nama Sensor
+                  </th>
+                  <th width="25%">
+                    Lokasi Sensor
+                  </th>
+                  <th width="15%">
+                    Jumlah
+                  </th>
               </tr>
               </thead>
               <tbody>
               <?php
-                $shift1 = $koneksi->query("SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
+                $shift1 = $koneksi->query("SELECT s.keterangan, s.lokasi, count(*) as jumlah FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor WHERE TIME(waktu)>='07:00:01' and TIME(waktu)<='15:00:00' AND DATE(waktu)='$today'");
                 //$result = mysqli_query($koneksi, $shift1);
                 if(mysqli_num_rows($shift1) > 0){
                   while($row = mysqli_fetch_assoc($shift1)){
                     echo '<tr>';
-                    // echo "<td><h6>" . $row["id_produksi"] . "</h6></td>";
-                    echo "<td><h6>" . $row["id_sensor"] . "</h6></td>";
+                    echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
                     echo "<td><h6>" . $row["lokasi"] . "</h6></td>";
                     echo "<td><h6>" . $row["jumlah"] . "</h6></td>";
-                    echo "<td><h6>" . $row["keterangan"] . "</h6></td>";
+                    
                   }
                 }
               ?>
@@ -279,7 +287,7 @@ $today = date('Y-m-d');
             <div class="modal-body">pilih "Logout" untuk keluar.</div>
             <div class="modal-footer">
               <button class="btn btn-info" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-danger" href="index.php">Logout</a>
+              <a class="btn btn-danger" href="proses/prosesLogout.php">Logout</a>
             </div>
           </div>
         </div>
