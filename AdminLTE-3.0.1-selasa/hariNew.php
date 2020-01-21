@@ -187,9 +187,6 @@ if (!isset($_SESSION['uname'])) {
                 <div class="table-responsive">
                     <table class="table-responsive">
                         <tr>
-
-                        </tr>
-                        <tr>
                             <td width=30%>
                                 <input type="text" name="date" id="date" class="form-control"
                                     placeholder="Pilih Tanggal" />
@@ -215,7 +212,7 @@ if (!isset($_SESSION['uname'])) {
                             <td width=30%>    
                                 <div class="combobox">
                                     <select name="shift" id="shift" class="form-control">
-                                    <option value="">--- pilih shift ---</option>    
+                                    <option value="">Harian tanpa shift</option>    
                                     <option value="01">Pagi</option>
                                         <option value="02">Sore</option>
                                         <option value="03">Malam</option>
@@ -350,7 +347,7 @@ if (!isset($_SESSION['uname'])) {
             if (date != '' && keterangan != '' || shift != '') {
                 
                     $.ajax({
-                    url: "filterHariCoba.php",
+                    url: "proses/filterHari.php",
                     method: "POST",
                     data: {
                         date: date,

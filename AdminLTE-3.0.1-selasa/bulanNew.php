@@ -184,7 +184,7 @@ if (!isset($_SESSION['uname'])) {
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <td width=43%>
+                            <td width=20%>
                                 <div class="combobox">
                                     <!-- <input type="text" name="month" id="month" class="form-control" placeholder="Month" /> -->
                                     <select name="month" id="month" class="form-control">
@@ -203,7 +203,7 @@ if (!isset($_SESSION['uname'])) {
                                     </select>
                                 </div>
                             </td>
-                            <td width=42%>
+                            <td width=20%>
                                 <div class="combobox col-md-12">
                                     <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
                                     <select name='year' id='year' class="form-control">";
@@ -222,8 +222,8 @@ if (!isset($_SESSION['uname'])) {
                                     </select>
                                 </div>
                             </td>
-                            <tr>
-                            <td width=43%>
+                            
+                            <td width=25%>
                                 <div class="combobox">
                                     <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
                                     <select name='keterangan' id='keterangan' class="form-control">";
@@ -242,9 +242,10 @@ if (!isset($_SESSION['uname'])) {
                                     </select>
                                 </div>
                             </td>
-                            <td width=42%>
+                            <td width=25%>
                                 <div class="combobox col-md-12">
                                     <select name="shift" id="shift" class="form-control">
+                                        <option value="">Bulanan tanpa shift</option>
                                         <option value="01">Pagi</option>
                                         <option value="02">Sore</option>
                                         <option value="03">Malam</option>
@@ -252,7 +253,7 @@ if (!isset($_SESSION['uname'])) {
                                 </div>
                             </td>
                             <td width=30%>
-                                <div class="col-md-3">
+                                <div class="col-md-12">
                                     <input type="button" name="filter" id="filter" value="Filter"
                                         class="btn btn-info" />
                                 </div>
@@ -377,7 +378,7 @@ $(document).ready(function() {
         var year = $('#year').val();
         var keterangan = document.getElementById("keterangan").value;
         var shift = $('#shift').val();
-        if (month != '' && year != '' && keterangan != '' && shift != '') {
+        if (month != '' && year != '' && keterangan != '' || shift != '') {
             $.ajax({
                 url: "proses/filterBulan.php",
                 method: "POST",
