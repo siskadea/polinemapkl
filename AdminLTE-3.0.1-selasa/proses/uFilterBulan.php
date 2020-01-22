@@ -143,13 +143,13 @@ if (isset($_POST["month"], $_POST["year"], $_POST["keterangan"])) {
             case "03":
                   $output = '';
             $query = "  
-                  SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah 
-                  FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
-                  WHERE s.keterangan='" . $_POST["keterangan"] . "' 
-                  and month(waktu) = '" . $_POST["month"] . "' 
-                  AND year(waktu) = '" . $_POST["year"] . "' 
-                  AND TIME(waktu)>='23:00:01'
-                  AND TIME(waktu)<='15:00:00' 
+            SELECT s.keterangan, s.lokasi, count(*) as jumlah 
+            FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
+            WHERE s.keterangan='" . $_POST["keterangan"] . "'
+            and year(waktu)='" . $_POST["year"] . "'
+            and month(waktu)='" . $_POST["month"] . "'
+            AND (TIME(waktu) BETWEEN '00:00:01' and '07:00:00'
+            or time(waktu) BETWEEN '23:00:01' and '23:59:59')
                   ";
             $result = mysqli_query($koneksi, $query);
             $output .= '  
