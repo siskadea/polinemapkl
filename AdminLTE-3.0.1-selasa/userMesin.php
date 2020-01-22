@@ -107,7 +107,7 @@ if(!isset($_SESSION['uname'])){
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="indexUser.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>

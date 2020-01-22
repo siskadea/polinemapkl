@@ -114,7 +114,7 @@ if (!isset($_SESSION['uname'])) {
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="indexUser.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -178,30 +178,32 @@ if (!isset($_SESSION['uname'])) {
             <div class="table-responsive">
                 <table>
                     <tr>
-                        <td width=30%>
-                            <div class="combobox ">
-                                <!-- <input type="text" name="month" id="month" class="form-control" placeholder="Month" /> -->
-                                <select name="month" id="month" class="form-control">
-                                    <option value="01">Januari</option>
-                                    <option value="02">Februari</option>
-                                    <option value="03">Maret</option>
-                                    <option value="04">April</option>
-                                    <option value="05">Mei</option>
-                                    <option value="06">Juni</option>
-                                    <option value="07">Juli</option>
-                                    <option value="08">Agustus</option>
-                                    <option value="09">September</option>
-                                    <option value="10">Oktober</option>
-                                    <option value="12">November</option>
-                                    <option value="12">Desember</option>
-                                </select>
-                            </div>
-                        </td>
-                        <td width=30%>
-                            <div class="combobox col-md-12">
-                                <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
-                                <select name='year' id='year' class="form-control">";
-                                    <?php
+                    <table>
+                        <tr>
+                            <td width=20%>
+                                <div class="combobox">
+                                    <!-- <input type="text" name="month" id="month" class="form-control" placeholder="Month" /> -->
+                                    <select name="month" id="month" class="form-control">
+                                        <option value="01">Januari</option>
+                                        <option value="02">Februari</option>
+                                        <option value="03">Maret</option>
+                                        <option value="04">April</option>
+                                        <option value="05">Mei</option>
+                                        <option value="06">Juni</option>
+                                        <option value="07">Juli</option>
+                                        <option value="08">Agustus</option>
+                                        <option value="09">September</option>
+                                        <option value="10">Oktober</option>
+                                        <option value="12">November</option>
+                                        <option value="12">Desember</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td width=20%>
+                                <div class="combobox col-md-12">
+                                    <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
+                                    <select name='year' id='year' class="form-control">";
+                                        <?php
                                     $qry = "SELECT waktu FROM produksi GROUP BY year(waktu)";
                                     $result2 = mysqli_query($koneksi, $qry);
                                     if (mysqli_num_rows($result2) > 0) {
@@ -212,15 +214,15 @@ if (!isset($_SESSION['uname'])) {
                                         }
                                     }
                                     ?>
-                                    }
-                                </select>
-                            </div>
-                        </td>
-                        <td width=30%>
-                        <div class="combobox col-md-12">
-                                <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
-                                <select name='keterangan' id='keterangan' class="form-control">";
-                                    <?php
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                            <td width=25%>
+                                <div class="combobox">
+                                    <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
+                                    <select name='keterangan' id='keterangan' class="form-control">";
+                                        <?php
                                     $qry = "SELECT keterangan FROM sensor";
                                     $result2 = mysqli_query($koneksi, $qry);
                                     if (mysqli_num_rows($result2) > 0) {
@@ -231,42 +233,53 @@ if (!isset($_SESSION['uname'])) {
                                         }
                                     }
                                     ?>
-                                    }
-                                </select>
-                            </div>
-                        </td>
-                        <td width=30%>
-                            <div class="col-md-3">
-                                <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <div style="clear:both"></div>
-                <br />
-                <div id="order_table">
-                    <table class="table table-bordered table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th width=30%>Nama Mesin</th>
-                                <th>Lokasi</th>
-                                <th>Jumlah</th>
-                            </tr>
-                        </thead>
-                        <?php
+                                        }
+                                    </select>
+                                </div>
+                            </td>
+                            <td width=25%>
+                                <div class="combobox col-md-12">
+                                    <select name="shift" id="shift" class="form-control">
+                                        <option value="">Bulanan tanpa shift</option>
+                                        <option value="01">Pagi</option>
+                                        <option value="02">Sore</option>
+                                        <option value="03">Malam</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td width=30%>
+                                <div class="col-md-12">
+                                    <input type="button" name="filter" id="filter" value="Filter"
+                                        class="btn btn-info" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div style="clear:both"></div>
+                    <br />
+                    <div id="order_table">
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th width=30%>Nama Mesin</th>
+                                    <th>Lokasi</th>
+                                    <th>Jumlah</th>
+                                </tr>
+                            </thead>
+                            <?php
                                     while ($row = mysqli_fetch_array($result)) {
                                     ?>
-                        <tbody>
-                            <tr>
-                                <td><?php echo $row["keterangan"]; ?></td>
-                                <td><?php echo $row["lokasi"]; ?></td>
-                                <td><?php echo $row["jumlah"]; ?></td>
-                            </tr>
-                        </tbody>
-                        <?php
+                            <tbody>
+                                <tr>
+                                    <td><?php echo $row["keterangan"]; ?></td>
+                                    <td><?php echo $row["lokasi"]; ?></td>
+                                    <td><?php echo $row["jumlah"]; ?></td>
+                                </tr>
+                            </tbody>
+                            <?php
                         }
                         ?>
-                    </table>
+                        </table>
                 </div>
             </section>
             <!-- /.content -->
@@ -275,9 +288,6 @@ if (!isset($_SESSION['uname'])) {
         <footer class="main-footer">
             <strong>Copyright &copy; 2020 <a href="polinema.ac.id">Polinema</a>.</strong>
             All rights reserved.
-            <!-- <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.1
-    </div> -->
         </footer>
 
         <!-- Control Sidebar -->
@@ -347,34 +357,36 @@ if (!isset($_SESSION['uname'])) {
 
 </html>
 <script>
-    $(document).ready(function() {
-        $.datepicker.setDefaults({
-            dateFormat: 'yy-mm-dd'
-        });
-        $(function() {
-            $("#month").datepicker();
-            $("#year").datepicker();
-        });
-        $('#filter').click(function() {
-            var month = $('#month').val();
-            var year = $('#year').val();
-            var keterangan = document.getElementById("keterangan").value;
-            if (month != '' && year != '' && keterangan != '') {
-                $.ajax({
-                    url: "proses/uFilterBulan.php",
-                    method: "POST",
-                    data: {
-                        month: month,
-                        year: year,
-                        keterangan: keterangan
-                    },
-                    success: function(data) {
-                        $('#order_table').html(data);
-                    }
-                });
-            } else {
-                alert("Please Select Date");
-            }
-        });
+$(document).ready(function() {
+    $.datepicker.setDefaults({
+        dateFormat: 'yy-mm-dd'
     });
+    $(function() {
+        $("#month").datepicker();
+        $("#year").datepicker();
+    });
+    $('#filter').click(function() {
+        var month = $('#month').val();
+        var year = $('#year').val();
+        var keterangan = document.getElementById("keterangan").value;
+        var shift = $('#shift').val();
+        if (month != '' && year != '' && keterangan != '' || shift != '') {
+            $.ajax({
+                url: "proses/filterBulan.php",
+                method: "POST",
+                data: {
+                    month: month,
+                    year: year,
+                    keterangan: keterangan,
+                    shift: shift
+                },
+                success: function(data) {
+                    $('#order_table').html(data);
+                }
+            });
+        } else {
+            alert("Please Select Date");
+        }
+    });
+});
 </script>

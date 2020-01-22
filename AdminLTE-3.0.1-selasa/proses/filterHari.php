@@ -135,13 +135,16 @@ if (isset($_POST["date"], $_POST["keterangan"])) {
                break;
 
           case "03":
+               $stop_date = $_POST["date"];
+               $stop_date = date('Y-m-d', strtotime($stop_date . ' +1 day'));
+
                $output = '';
                $query = "  
                SELECT s.keterangan, s.lokasi, count(*) as jumlah 
                FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
                WHERE s.keterangan='" . $_POST["keterangan"] . "'
                and waktu>='" . $_POST["date"] . " 23:00:01' 
-               and '" . $_POST["date"] . " 07:00:00'
+               and waktu<='$stop_date 07:00:00'
 
           ";
                $result = mysqli_query($koneksi, $query);
@@ -162,7 +165,7 @@ if (isset($_POST["date"], $_POST["keterangan"])) {
                     <tr>  
                          <td>' . $row["keterangan"] . '</td>       
                          <td>' . $row["lokasi"] . '</td>  
-                         <td>' . $row["jumlah"] . '</td>            
+                         <td>' . $row["jumlah"] . '</td>           
                     </tr>
                     </tbody>  
                     ';

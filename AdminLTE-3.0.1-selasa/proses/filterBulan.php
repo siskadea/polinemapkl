@@ -1,6 +1,9 @@
 <?php
 include_once '../koneksi.php';
 if (isset($_POST["month"], $_POST["year"], $_POST["keterangan"])) {
+      // $stop_month = ;
+            $stop_month = date("Y-m-1", strtotime("+1 month"));
+            echo $stop_month;
       switch($_POST["shift"]){
             case "":
             $output = '';
@@ -141,16 +144,21 @@ if (isset($_POST["month"], $_POST["year"], $_POST["keterangan"])) {
             echo $output;
             break;
             case "03":
-                  $output = '';
+            $stop_month = $_POST["month"];
+            $stop_month = date($stop_month, strtotime("+1 month"));
+            echo $stop_month;
+            // $date = date('Y-m-1',  strtotime("+1 month"));
+            // echo $date ;
+            $output = '';
             $query = "  
-                  SELECT s.id_sensor, s.lokasi, s.keterangan, count(*) as jumlah 
-                  FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
-                  WHERE s.keterangan='" . $_POST["keterangan"] . "' 
-                  and month(waktu) = '" . $_POST["month"] . "' 
-                  AND year(waktu) = '" . $_POST["year"] . "' 
-                  AND TIME(waktu)>='23:00:01'
-                  AND TIME(waktu)<='15:00:00' 
-                  ";
+            SELECT s.keterangan, s.lokasi, count(*) as jumlah 
+            FROM produksi p INNER JOIN sensor s ON p.id_sensor = s.id_sensor 
+            WHERE s.keterangan='" . $_POST["keterangan"] . "'
+            and year(waktu)='" . $_POST["year"] . "'
+            and month(waktu)='" . $_POST["month"] . "'
+            and time(waktu)>='23:00:01'  
+            and time(waktu)<='07:00:00'
+            ";
             $result = mysqli_query($koneksi, $query);
             $output .= '  
                   <table class="table table-bordered table-hover table-striped">

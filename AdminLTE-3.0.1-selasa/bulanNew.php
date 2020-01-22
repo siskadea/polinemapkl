@@ -115,7 +115,7 @@ if (!isset($_SESSION['uname'])) {
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="index1.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -222,7 +222,6 @@ if (!isset($_SESSION['uname'])) {
                                     </select>
                                 </div>
                             </td>
-                            
                             <td width=25%>
                                 <div class="combobox">
                                     <!-- <input type="text" name="year" id="year" class="form-control" placeholder="Year" /> -->
@@ -293,9 +292,6 @@ if (!isset($_SESSION['uname'])) {
         <footer class="main-footer">
             <strong>Copyright &copy; 2020 <a href="polinema.ac.id">Polinema</a>.</strong>
             All rights reserved.
-            <!-- <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.1
-    </div> -->
         </footer>
 
         <!-- Control Sidebar -->

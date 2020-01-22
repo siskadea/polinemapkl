@@ -113,7 +113,7 @@ if (!isset($_SESSION['uname'])) {
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        <li class="nav-item has-treeview menu-open">
+                        <li class="nav-item has-treeview">
                             <a href="indexUser.php" class="nav-link">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
@@ -177,12 +177,10 @@ if (!isset($_SESSION['uname'])) {
                 <br>
                 <div class="table-responsive">
                     <table class="table-responsive">
-                        <tr>
+                    <tr>
                             <td width=30%>
-                                <!-- <div class="col-md-12"> -->
                                 <input type="text" name="date" id="date" class="form-control"
                                     placeholder="Pilih Tanggal" />
-                                <!-- </div> -->
                             </td>
                             <td width=30%>
                                 <div class="combobox col-md-12">
@@ -205,7 +203,8 @@ if (!isset($_SESSION['uname'])) {
                             <td width=30%>    
                                 <div class="combobox">
                                     <select name="shift" id="shift" class="form-control">
-                                        <option value="01">Pagi</option>
+                                    <option value="">Harian tanpa shift</option>    
+                                    <option value="01">Pagi</option>
                                         <option value="02">Sore</option>
                                         <option value="03">Malam</option>
                                     </select>
@@ -218,70 +217,6 @@ if (!isset($_SESSION['uname'])) {
                                 </div>
                             </td>
                         </tr>
-                        <!-- <tr>
-                            <td>
-                            <div class="table-responsive">
-                            <div class="combobox col-md-12">
-                                <select name="month" id="month" class="form-control">
-                                    <option value="01">Januari</option>
-                                    <option value="02">Februari</option>
-                                    <option value="03">Maret</option>
-                                    <option value="04">April</option>
-                                    <option value="05">Mei</option>
-                                    <option value="06">Juni</option>
-                                    <option value="07">Juli</option>
-                                    <option value="08">Agustus</option>
-                                    <option value="09">September</option>
-                                    <option value="10">Oktober</option>
-                                    <option value="12">November</option>
-                                    <option value="12">Desember</option>
-                                </select>
-                            </div>
-                            </td>
-                            <td>
-                            <div class="combobox col-md-12">
-                                
-                                <select name='year' id='year' class="form-control">";
-                                    <?php
-                                    // $qry = "SELECT waktu FROM produksi GROUP BY year(waktu)";
-                                    // $result2 = mysqli_query($koneksi, $qry);
-                                    // if (mysqli_num_rows($result2) > 0) {
-                                    //     while ($t = mysqli_fetch_array($result2)) {
-                                    //         $data = explode('-', $t['waktu']);
-                                    //         $tahun = $data[0];
-                                    //         echo "<option value='$tahun'>$tahun</option>";
-                                    //     }
-                                    // }
-                                    ?>
-                                    }
-                                </select>
-                            </div>
-                            </td>
-                            <td>
-                            <div class="combobox col-md-12">
-                                
-                                <select name='keterangan' id='keterangan' class="form-control">";
-                                    <?php
-                                    // $qry = "SELECT keterangan FROM sensor";
-                                    // $result2 = mysqli_query($koneksi, $qry);
-                                    // if (mysqli_num_rows($result2) > 0) {
-                                    //     while ($ket = mysqli_fetch_array($result2)) {
-                                    //         $data = explode('-', $ket['keterangan']);
-                                    //         $keterangan = $data[0];
-                                    //         echo "<option value='$keterangan'>$keterangan</option>";
-                                    //     }
-                                    // }
-                                    ?>
-                                    }
-                                </select>
-                            </div>
-                            </td>
-                            <td>
-                            <div class="col-md-3">
-                                <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
-                            </div>
-                            </td>
-                        </tr> -->
                     </table>
                     <!-- <div style="clear:both"></div> -->
                     <br />
@@ -387,31 +322,38 @@ if (!isset($_SESSION['uname'])) {
 
 </html>
 <script>
-$(document).ready(function() {
-    $.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd'
+    $(document).ready(function() {
+        $.datepicker.setDefaults({
+            dateFormat: 'yy-mm-dd',
+            // timeFormat: 'h:mm p'
+        });
+        $(function() {
+            $("#date").datepicker();
+            // $("#shift").timepicker();
+        });
+        $('#filter').click(function() {
+            var date = $('#date').val();
+            var keterangan = document.getElementById("keterangan").value;
+            var shift = $("#shift").val();
+            if (date != '' && keterangan != '' || shift != '') {
+                
+                    $.ajax({
+                    url: "proses/filterHari.php",
+                    method: "POST",
+                    data: {
+                        date: date,
+                        keterangan: keterangan,
+                        shift: shift
+                    },
+                    success: function(data) {
+                        $('#order_table').html(data);
+                    }
+                });
+                
+                
+            } else {
+                alert("Please Select Date");
+            }
+        });
     });
-    $(function() {
-        $("#date").datepicker();
-    });
-    $('#filter').click(function() {
-        var date = $('#date').val();
-        var keterangan = document.getElementById("keterangan").value;
-        if (date != '' && keterangan != '') {
-            $.ajax({
-                url: "proses/uFilterHari.php",
-                method: "POST",
-                data: {
-                    date: date,
-                    keterangan: keterangan
-                },
-                success: function(data) {
-                    $('#order_table').html(data);
-                }
-            });
-        } else {
-            alert("Please Select Date");
-        }
-    });
-});
 </script>
