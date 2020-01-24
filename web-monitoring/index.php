@@ -22,7 +22,7 @@ if(isset($_GET['pesan'])){
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>DivmuPindad | Login</title>
+    <title>SIMPRO | Login</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -58,7 +58,7 @@ if(isset($_GET['pesan'])){
                 </div>
                 <!-- <img src="dist/img/logo.png" alt="logo" width="150px" align> -->
                 <div class="login-logo">
-                    <strong>Divmu</strong>
+                    <strong>SIMPRO</strong>
                 </div>
                 <!-- <p class="login-box-msg">Sign in to start your session</p> -->
 
@@ -67,7 +67,7 @@ if(isset($_GET['pesan'])){
                         <input type="text" class="form-control" placeholder="Username" name="uname" id="uname">
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>

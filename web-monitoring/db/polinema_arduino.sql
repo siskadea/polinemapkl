@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2020 at 05:11 AM
+-- Generation Time: Jan 24, 2020 at 02:39 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 5.6.32
 
@@ -42,8 +42,8 @@ CREATE TABLE `lat_user` (
 
 INSERT INTO `lat_user` (`id_user`, `nama`, `uname`, `pass`, `level`) VALUES
 (32, 'Asri Putri', 'asri', '123', 1),
-(33, 'Siska Dea', 'siskadea', 'siskadea', 1),
-(34, 'siska', 'siska', '123', 2);
+(33, 'Siska Dea', 'siska', '123', 1),
+(36, 'Testing', 'testing', 'testing', 2);
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,16 @@ INSERT INTO `produksi` (`id_produksi`, `id_sensor`, `waktu`) VALUES
 (108, 2, '2020-01-20 23:40:00'),
 (109, 2, '2020-01-21 02:00:00'),
 (110, 2, '2020-01-21 11:00:00'),
-(111, 3, '2020-01-21 16:07:00');
+(111, 3, '2020-01-21 16:07:00'),
+(112, 3, '2020-02-01 23:05:00'),
+(113, 3, '2020-02-02 06:00:00'),
+(114, 3, '2020-01-22 02:00:00'),
+(115, 2, '2020-01-23 10:00:00'),
+(116, 1, '2020-01-24 07:00:00'),
+(117, 1, '2020-01-24 08:31:18'),
+(118, 1, '2020-01-24 08:31:19'),
+(119, 1, '2020-01-24 08:31:21'),
+(120, 2, '2020-01-24 08:32:56');
 
 -- --------------------------------------------------------
 
@@ -125,7 +134,7 @@ CREATE TABLE `sensor` (
 INSERT INTO `sensor` (`id_sensor`, `lokasi`, `keterangan`) VALUES
 (1, 'Pindad', 'Mesin 1'),
 (2, 'Produksi', 'Mesin 2'),
-(3, 'Dept Produksi', 'Mesin 3');
+(3, 'Produksi', 'Mesin 3');
 
 --
 -- Indexes for dumped tables
@@ -165,7 +174,7 @@ ALTER TABLE `sensor`
 -- AUTO_INCREMENT for table `lat_user`
 --
 ALTER TABLE `lat_user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `lat_user_lvl`
@@ -177,7 +186,7 @@ ALTER TABLE `lat_user_lvl`
 -- AUTO_INCREMENT for table `produksi`
 --
 ALTER TABLE `produksi`
-  MODIFY `id_produksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
+  MODIFY `id_produksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
 
 --
 -- AUTO_INCREMENT for table `sensor`

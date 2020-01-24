@@ -95,7 +95,7 @@ if(!isset($_SESSION['uname'])){
             <a href="index1.php" class="brand-link">
                 <img src="dist/img/logooh.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-dark">PindadDivmu</span>
+                <span class="brand-text font-weight-dark">SIMPRO</span>
             </a>
 
             <!-- Sidebar -->
@@ -295,6 +295,9 @@ if(!isset($_SESSION['uname'])){
                                               echo "<td><h6>".$row['jumlah']."</h6></td>";
                                               echo "</tr>";
                                           }
+                                      }else{
+                                        echo "<tr>";
+                                        echo "<td colspan=3><h6>Tidak ada produksi hari ini</h6></td>";
                                       }
                                   ?>
                                 </tbody>
@@ -312,9 +315,6 @@ if(!isset($_SESSION['uname'])){
     <footer class="main-footer">
         <strong>Copyright &copy; 2020 <a href="polinema.ac.id">Polinema</a>.</strong>
         All rights reserved.
-        <!-- <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.1
-    </div> -->
     </footer>
 
     <!-- Control Sidebar -->

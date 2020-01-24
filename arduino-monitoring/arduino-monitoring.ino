@@ -48,13 +48,13 @@ void loop() {
     Serial.print("Count: ");
     Serial.println(count);
 
-    String kiriman = "id_sensor=1";
+    String kiriman = "id_sensor=2";
 //    kiriman += count;
 
     if (client.connect("192.168.196.130", 80)) {
       Serial.println("Sending to Server: ");
-      client.println("POST /web-monitoring/terima.php HTTP/1.1");
-      Serial.println("POST /web-monitoring/terima.php HTTP/1.1");
+      client.println("POST /pkl/web-monitoring/terima.php HTTP/1.1");
+      Serial.println("POST /pkl/web-monitoring/terima.php HTTP/1.1");
       client.println("Host: 192.168.196.130");
       client.println("Content-Type: application/x-www-form-urlencoded");
       client.println("Connection: close");

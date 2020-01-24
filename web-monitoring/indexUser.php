@@ -92,7 +92,7 @@ if(!isset($_SESSION['uname'])){
       <!-- Brand Logo -->
       <a href="indexUser.php" class="brand-link">
         <img src="dist/img/logooh.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-dark">PindadDivmu</span>
+        <span class="brand-text font-weight-dark">SIMPRO</span>
       </a>
 
       <!-- Sidebar -->
@@ -279,6 +279,9 @@ if(!isset($_SESSION['uname'])){
                                               echo "<td><h6>".$row['jumlah']."</h6></td>";
                                               echo "</tr>";
                                           }
+                                      }else{
+                                        echo "<tr>";
+                                        echo "<td colspan=3><h6>Tidak ada produksi hari ini</h6></td>";
                                       }
                                   ?>
                                 </tbody>
