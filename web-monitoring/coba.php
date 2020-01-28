@@ -8,8 +8,21 @@ $query = "SELECT s.lokasi, s.keterangan, count(*) as jumlah
 $result = mysqli_query($koneksi, $query);
 session_start();
 $name = $_SESSION['uname'];
-if (!isset($_SESSION['uname'])) {
-  header("location: index.php");
+if (isset($_SESSION['level']))
+{
+	// jika level admin
+	if ($_SESSION['level'] == 1)
+   {   
+   }
+   // jika kondisi level user maka akan diarahkan ke halaman lain
+   else if ($_SESSION['level'] == 2)
+   {
+       header('location:indexUser.php');
+   }
+}
+if (!isset($_SESSION['level']) || !isset($_SESSION['uname']))
+{
+	header('location: index.php');
 }
 ?>
 <!DOCTYPE html>

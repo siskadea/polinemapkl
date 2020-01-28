@@ -51,11 +51,11 @@ void loop() {
     String kiriman = "id_sensor=2";
 //    kiriman += count;
 
-    if (client.connect("192.168.196.130", 80)) {
+    if (client.connect("simpro.divmu.pindad.co.id", 80)) {
       Serial.println("Sending to Server: ");
-      client.println("POST /pkl/web-monitoring/terima.php HTTP/1.1");
-      Serial.println("POST /pkl/web-monitoring/terima.php HTTP/1.1");
-      client.println("Host: 192.168.196.130");
+      client.println("POST /terima.php HTTP/1.1");
+      Serial.println("POST /terima.php HTTP/1.1");
+      client.println("Host: simpro.divmu.pindad.co.id");
       client.println("Content-Type: application/x-www-form-urlencoded");
       client.println("Connection: close");
       client.println("User-Agent: Arduino/1.0");
